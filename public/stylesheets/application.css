@@ -1,0 +1,45 @@
+body{
+  padding-top: 60px; /* 60px to make the container make room for the navigation bar */
+}
+
+ .row~hr{
+margin: 10px 0;
+border:0;
+border-top:1px solid #eeeeee;
+border-bottom: 1px solid #ffffff;
+}
+
+.container {
+	margin-top:75px;
+}
+
+.spacer {
+    margin-bottom: 40px; /* define margin as you see fit */
+}
+
+.input-append.input-block-level,
+.input-prepend.input-block-level {
+    display: table;
+}
+
+.input-append.input-block-level .add-on,
+.input-prepend.input-block-level .add-on {
+    display: table-cell;
+    width: 1%; /* remove this if you want default bootstrap button width */
+}
+
+.input-append.input-block-level > input,
+.input-prepend.input-block-level > input {
+    box-sizing: border-box; 
+    display: table; 
+    min-height: inherit;
+    width: 100%;
+}
+
+.input-append.input-block-level > input {
+    border-right: 0; /* removes the extra right border from the input */
+}
+
+.input-prepend.input-block-level > input {
+    border-left: 0; /* removes the extra left border from the input */
+}

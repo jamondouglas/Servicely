@@ -2,6 +2,10 @@ var db = require("../database.js");
 
 exports.providers = {};
 
+exports.index=function(req, res){
+	res.sendfile(process.cwd()+'/views/index.html');
+};
+
 exports.providers.all= function(req,res){
 	db.providers.find({},function(err,providers){
 		if(err){return;}

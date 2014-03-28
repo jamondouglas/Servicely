@@ -1,0 +1,1 @@
+ServiceManager.module("ProvidersApp.Common.Views", function(Views,ServiceManager,Back))

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- A meta name declaration which disables zoom for mobile devices.-->
+    
+    <title>Service.ly</title>
+    <link href="./stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="./stylesheets/application.css" rel="stylesheet">
+    <link href="./stylesheets/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <span class="brand">Service Manager</span>
+        </div>
+      </div>
+    </div>
+    <div id="main-region" class="container">
+
+
+
+
+      </div>
+      <!-- TEMPLATES -->
+        <script type="text/template" id="contact-list-item">
+        <td><%= firstName%></td> <td><%=lastName %> </td> 
+        <td>
+        <a href="#" class="btn btn-primary btn-small js-show"><i class="icon-eye-open"></i>  Show</a>
+        </td>
+        </script>
+        <script type="text/template" id="contact-list">
+       <thead>
+        <tr> <th>First Name</th> <th> Last Name</th><th></th></tr>
+       </thead>
+       <tbody>
+       </tbody>
+        </script>
+        <script type="text/template" id="provider-view">
+          <h1><%= firstName%> <%=lastName %></h1>
+          <p><strong> Phone Number:</strong> <%= phoneNumber %></p>
+        </script>
+
+
+        <script type="text/template" id="provider-view-css">
+          <div class="row-fluid spacer">
+            <div class="span12" style=""><h1><%= firstName%> <%= lastName%></h1></div>
+          </div>  
+          <div class="row-fluid spacer">
+            <div class="span4" id="imageHolder" style="border: 1px solid blue"></div>
+            <div class="span8" style="border:1px solid red">
+            <div class="span6" style="border:1px solid green">
+             <div class="input-prepend">
+              <span class="add-on">Phone Number</span>
+              <input class="" id="prependedInput" type="text" placeholder="<%= phoneNumber %>" >
+              </div><!-- close input-prepend -->
+              <div class="row-fluid spacer">
+              <div class="input-prepend">
+              <span class="add-on">Email</span>
+              <input class="" id="prependedInput" type="text" placeholder="<%= email %>" >
+              </div><!-- close input-prepend -->
+              </div><!-- close row -->
+              </div> <!-- span5 -->
+            </div><!--span8 -->
+          </div><!-- close row fluid -->
+
+               
+          <div class="row-fluid">
+           <div class="span12" style="border:1px solid orange"></div>
+          </div>
+        </script>
+
+
+        <script type="text/template" id="provider-view-csss">
+       <div class="row-fluid spacer">
+            <div class="span12" style=""><h1><%= firstName%> <%= lastName%></h1></div>
+            <button class="btn btn-primary btn-small js-home" >
+          <i class="icon-home"></i>
+          Home
+        </button>
+        <a href="#providers/<%= id %>/edit" class="btn btn-primary btn-small js-edit">
+        <i class="icon-pencil"></i>
+          Edit this contact
+        </a>
+          </div>  
+          <div class="row-fluid spacer">
+            <div class="span4" id="imageHolder" style="">
+            <img src="<%= imagePath %>"/>
+            </div><!-- span4 -->
+            <div class="span8" style="">
+            <div class="row-fluid-spacer">
+            <div class="span6">
+                            <div class="control-group">
+                  <div class="controls">
+                    <div class="input-prepend input-block-level">
+                    <span class="add-on">Name</span>
+                      <input type="text" id="prependedInput" placeholder="<%= firstName %> <%= lastName %>" >
+                    </div>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <div class="controls">
+                    <div class="input-prepend input-block-level">
+                      <span class="add-on">Email</span>
+                      <input type="text" id="prependedInput" placeHolder="<%= email %>">
+                    </div>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <div class="controls">
+                    <div class="input-prepend input-block-level">
+                      <span class="add-on">Phone Number</span>
+                      <input type="text" id="prependedInput" placeHolder="<%= phoneNumber %>">
+                    </div>
+                  </div>
+                </div>
+            </div><!-- span6 -->
+            </div><!-row-fluid -->
+            <div class="clearfix">
+            </div>
+            <div class="control-group spacer">
+           <div class="span5" style="">Skills section needs to be implemented.</div>
+           </div>
+           <div class="row-fluid spacer">
+            <div class="span12" style="">Review section found here.</div>
+           </div>
+            </div><!-- span8 -->
+            </div><!-- row-fluid-spacer -->
+</script>
+
+<script type="text/template" id="missing-contact-view">
+ <div class="alert alert-error">This contact does not exist !</div>
+ <button class="btn btn-primary btn-small js-home" >
+          <i class="icon-home"></i>
+          Home
+        </button>
+ </script>
+ <script type="text/template" id="loading-view">
+ <h1>Loading Data..</h1>
+ <div id="spinner"></div>
+ </script>
+ <script type="text/template" id="provider-form">
+ <h1>Edit <%= firstName %> <%= lastName %></h1>
+ <form>
+ <div class="row-fluid spacer">
+ <div class="span4">
+  <img src="<%= imagePath %>"/>
+ </div>
+ <div class="span8">
+  <div class="control-group">
+    <label for="provider-firstName" class="control-label">
+      First Name:</label>
+      <input id="provider-firstName" name="firstName" type="text" value="<%= firstName %>"/>
+  </div>
+  <div class="control-group">
+    <label for="provider-lastName" class="control-label">Last Name:</label>
+    <input id="provider-lastName" name="lastName" type="text" value="<%= lastName %>"/>
+  </div>
+  <div class="control-group">
+  <label for="provider-phoneNumber" class="control-label">Phone number:</label>
+  <input id="provider-phoneNumber" name="phoneNumber" type="text" value="<%= phoneNumber%>"/>
+  </div><!-- end of control-group-->
+  </div><!-- end of span6 -->
+  </div><!-- end of row fluid -->
+  <button class="btn js-submit">Save</button>
+ </form>
+ </script>
+ <script type="text/template" id="providers-search-layout">
+ <div id="search-region"></div>
+ <div id="providers-region"></div>
+ </script>
+ <script type="text/template" id="providers-search-panel">
+        <div class="row-fluid">
+        <button class="btn btn-primary js-search" type="button"><i class="icon-plus"></i>  New</button>
+        </div>
+        <div class="row-fluid">
+          <div class="span3 offset3">
+            <div class="input-append">
+              <input class="input-xlarge filterCriterion" id="appendInputButton" type="text" value="I need a painter,landscaper, cleaning, home repair">
+              <button class="btn btn-primary js-search" type="button"><i class="icon-search"></i>  Search</button>
+              </span>
+            </div>
+          </div>
+        </div><!--end of row-->
+        <hr>
+        </script>
+
+      <!-- TEMPLATES END-->
+      <!-- SCRIPTS -->
+      <script src="./javascripts/vendor/jquery.js"></script>
+      <script src="./javascripts/vendor/jquery-ui-1.10.3.js"></script>
+      <script src="./javascripts/vendor/json2.js"></script>
+      <script src="./javascripts/vendor/underscore.js"></script>
+      <script src="./javascripts/vendor/backbone.js"></script>
+      <script src="./javascripts/vendor/backbone.syphon.js"></script>
+      <script src="./javascripts/vendor/backbone.localstorage.js"></script>
+      <script src="./javascripts/vendor/backbone.marionette.js"></script>
+       <script type=" text/javascript" src="./javascripts/vendor/spin.js"></script>
+      <script type="text/javascript" src="./javascripts/vendor/spin.jquery.js"></script>
+      
+
+      <script type="text/javascript" src="./javascripts/app.js"></script>
+      <script type="text/javascript" src="./javascripts/apps/config/storage/localstorage.js"></script>
+      <script src="./javascripts/common/views.js"></script>
+      <script type="text/javascript" src="./javascripts/entities/providers.js"></script>
+      <script type="text/javascript" src="./javascripts/common/views.js"></script>
+      <script type="text/javascript" src="./javascripts/apps/providers/providers_app.js"></script>
+      <script type="text/javascript" src="./javascripts/apps/providers/list/list_view.js"></script>
+      <script type="text/javascript" src="./javascripts/apps/providers/list/list_controller.js"></script>
+      <script type="text/javascript" src="./javascripts/apps/providers/show/show_view.js"></script>
+      <script type="text/javascript" src="./javascripts/apps/providers/show/show_controller.js"></script>
+      <script type="text/javascript" src="./javascripts/apps/providers/edit/edit_view.js"></script>
+      <script type="text/javascript" src="./javascripts/apps/providers/edit/edit_controller.js"></script>
+      <!--SCRIPTS END -->
+
+      <script type="text/javascript">
+      ServiceManager.start();
+      </script>
+
+    </body>
+  </html>
+
+
+  <!--
